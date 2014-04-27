@@ -44,129 +44,135 @@ URL: https://code.google.com/p/io-2012-slides
 
   <slide>
     <hgroup>
-      <h2>Slide with Bullets</h2>
+      <h2>Agenda</h2>
     </hgroup>
     <article>
-      <ul>
-        <li>Titles are formatted as Open Sans with bold applied and font size is set at 45</li>
-        <li>Title capitalization is title case
+      <ul class="build">
+        <li>Basic REST Demo
+        </li>
+        <li>GET
           <ul>
-            <li>Subtitle capitalization is title case</li>
+            <li>GET our first request (/node/1)</li>
+            <li>Overview of how D8 does REST</li>
+            <li>Current state of D8 REST</li>
+            <li>Uses & Scenarios</li>
           </ul>
         </li>
-        <li>Subtitle capitalization is title case</li>
-        <li>Titles and subtitles should never have a period at the end</li>
+        <li>POST/PATCH/DELETE
+          <ul>
+            <li>Formats (JSON / HAL / XML)</li>
+            <li>Authentication (/node/2/POST)</li>
+          </ul>
+        </li>
+        <li>D8 REST
+          <ul>
+            <li>Special fields (Node refence, file, date, etc)</li>
+            <li>Views & REST</li>
+          </ul>
+        </li>
       </ul>
     </article>
   </slide>
 
   <slide>
     <hgroup>
-      <h2>Slide with Bullets that Build</h2>
-      <h3>Subtitle Placeholder</h3>
+      <h2>Who are we?</h2>
     </hgroup>
     <article>
-      <p>A list where items build:</p>
-      <ul class="build">
-        <li>Pressing 'h' highlights code snippets</li>
-        <li>Pressing 'p' toggles speaker notes (if they're on the current slide)</li>
-        <li>Pressing 'f' toggles fullscreen viewing</li>
-        <li>Pressing 'w' toggles widescreen</li>
-        <li>Pressing 'o' toggles overview mode</li>
-        <li>Pressing 'ESC' toggles off these goodies</li>
-      </ul>
-      <p>Another list, but items fade as they build:</p>
-      <ul class="build fade">
-        <li>Hover over me!</li>
-        <li>Hover over me!</li>
-        <li>Hover over me!</li>
-      </ul>
-    </article>
-  </slide>
-
-  <slide>
-    <hgroup>
-      <h2>Slide with (Smaller Font)</h2>
-    </hgroup>
-    <article class="smaller">
+      <br />
+      <p>Arvin Singla</p>
       <ul>
-        <li>All <a href="http://google.com">links</a> open in new tabs.</li>
-        <li>To change that this, add <code>target="_self"</code> to the link.</li>
+        <li>Likes Drupal</li>
+        <li>6'0"</li>
+      </ul>
+      <br />
+      <br />
+      <p>Sebastian Lesch</p>
+      <ul>
+        <li>Likes Drupal</li>
+        <li>5'8" & 1/2</li>
       </ul>
     </article>
   </slide>
 
-  <slide hidden>
-    Hidden slides are left out of the presentation.
+  <slide class="title-slide segue nobackground">
+    <aside class="gdbar"><img src="images/myplanet_logo_128.png"></aside>
+    <hgroup class="auto-fadein">
+      <h1>Basic D8 REST demo</h1>
+      <h2>Setting up Drupal to output REST from "minimal" profile</h2>
+    </hgroup>
+  </slide>
+
+  <slide class="title-slide segue nobackground">
+    <aside class="gdbar"><img src="images/myplanet_logo_128.png"></aside>
+    <hgroup class="auto-fadein">
+      <h1>GET</h1>
+      <h2>Our first requests.</h2>
+      <h2>How does D8 do it?</h2>
+    </hgroup>
   </slide>
 
   <slide>
     <hgroup>
-      <h2>Code Slide (with Subtitle Placeholder)</h2>
-      <h3>Subtitle Placeholder</h3>
+      <h2>GET our first request</h2>
     </hgroup>
     <article>
-      <p>Press 'h' to highlight important sections of code (wrapped in <code>&lt;b&gt;</code>).</p>
-      <pre class="prettyprint" data-lang="javascript">
-&lt;script type='text/javascript'&gt;
-  // Say hello world until the user starts questioning
-  // the meaningfulness of their existence.
-  function helloWorld(world) {
-    <b>for (var i = 42; --i &gt;= 0;) {
-      alert('Hello ' + String(world));
-    }</b>
-  }
-&lt;/script&gt;
-</pre>
-    </article>
-  </slide>
-
-  <slide>
-    <hgroup>
-      <h2>Code Slide (Smaller Font)</h2>
-    </hgroup>
-    <article class="smaller">
-      <pre class="prettyprint" data-lang="javascript">
-// Say hello world until the user starts questioning
-// the meaningfulness of their existence.
-function helloWorld(world) {
-  for (var i = 42; --i &gt;= 0;) {
-    alert('Hello ' + String(world));
-  }
+      <pre class="prettyprint">
+        http://localhost/node/1</pre>
+      <p>By default the returned format is HAL, and might look like this:</p>
+      <pre class="prettyprint" data-lang="HAL">
+{
+  nid: 1,
+  title: 'First post',
+  uid: 1
 }
 </pre>
-<pre class="prettyprint" data-lang="css">
-&lt;style&gt;
-  p { color: pink }
-  b { color: blue }
-&lt;/style&gt;
-</pre>
-<pre class="prettyprint" data-lang="html">
-&lt;!DOCTYPE html>
-&lt;html>
-&lt;head>
-  &lt;title>My Awesome Page&lt;/title>
-&lt;/head>
-&lt;body>
-  &lt;p&gt;Hello world&lt;/p&gt;
-&lt;body>
-&lt;/html>
-</pre>
     </article>
   </slide>
 
   <slide>
-    <aside class="note">
-      <section>
-        <ul>
-          <li>Point I wanted to make #1</li>
-          <li>Point I wanted to make #2</li>
-          <li>Point I wanted to make #3</li>
-          <li>Example <a href="#">link</a> in notes.</li>
-        </ul>
-        <p><b>Remember to say this tag line!</b></p>
-      </section>
-    </aside>
+    <hgroup>
+      <h2>How D8 does REST</h2>
+    </hgroup>
+    <article>
+      <p>This is how D8 RESTs:</p>
+      <ul>
+        <li>Thing 1</li>
+        <li>Thing 2</li>
+        <li>Thing 3</li>
+      </ul>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Current state of D8 REST</h2>
+    </hgroup>
+    <article>
+      <p>The low-down on D8's REST:</p>
+      <ul>
+        <li>Thing 1</li>
+        <li>Thing 2</li>
+        <li>Thing 3</li>
+      </ul>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Uses & Scenarios</h2>
+    </hgroup>
+    <article>
+      <p>The low-down on D8's REST:</p>
+      <ul>
+        <li>Maybe have full screen images to help describe the scenarios?</li>
+        <li>Thing 2</li>
+        <li>Thing 3</li>
+      </ul>
+    </article>
+  </slide>
+
+  <slide>
     <hgroup>
       <h2>Slide with Speaker Notes</h2>
     </hgroup>
