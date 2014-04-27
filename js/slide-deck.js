@@ -377,7 +377,7 @@ SlideDeck.prototype.loadConfig_ = function(config) {
       if (settings.eventInfo) {
         var date = settings.eventInfo.date;
         var dateInfo = date ? ' - <time>' + date + '</time>' : '';
-        dataConfigPresenter.innerHTML += settings.eventInfo.title + dateInfo;
+        dataConfigPresenter.innerHTML += '<br/>' + settings.eventInfo.title + dateInfo;
       }
     }
   }
