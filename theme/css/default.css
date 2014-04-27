@@ -716,6 +716,10 @@ button:not(:disabled):active {
   color: black !important;
 }
 
+.glow {
+  text-shadow: 0 0 5px #FFF, 0 0 5px #FFF;
+}
+
 /* line 468, ../scss/default.scss */
 .columns-2 {
   -webkit-column-count: 2;
