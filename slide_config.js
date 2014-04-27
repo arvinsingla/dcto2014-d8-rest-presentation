@@ -1,7 +1,7 @@
 var SLIDE_CONFIG = {
   // Slide settings
   settings: {
-    title: 'The REST of D8',
+    title: '&lt;The REST of D8&gt;',
     subtitle: '',
     eventInfo: {
       title: 'DrupalCamp Toronto 2014',

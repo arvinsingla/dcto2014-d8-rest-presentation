@@ -1092,7 +1092,7 @@ article.smaller q:before, article.smaller q:after {
   font-size: 14px;
   color: darkgrey;
   position: absolute;
-  bottom: 70px;
+  bottom: 100px;
   left: 60px;
 }
 
@@ -1237,12 +1237,16 @@ article.smaller q:before, article.smaller q:after {
 
 /* line 826, ../scss/default.scss */
 .thank-you-slide {
-  background: #4387fd !important;
+  background: #0077c0 !important;
   color: white;
 }
 /* line 830, ../scss/default.scss */
 .thank-you-slide h2 {
   font-size: 60px;
+  color: inherit;
+}
+.thank-you-slide h3 {
+  font-size: 40px;
   color: inherit;
 }
 /* line 835, ../scss/default.scss */
@@ -1322,6 +1326,11 @@ aside.gdbar img {
   margin: 8px 15px;
 }
 
+.opening-slide {
+  background-color: #0077c0 !important;
+  color: white;
+}
+
 /* line 888, ../scss/default.scss */
 .title-slide hgroup {
   bottom: 100px;
@@ -1331,32 +1340,35 @@ aside.gdbar img {
   font-size: 65px;
   line-height: 1.4;
   letter-spacing: -3px;
-  color: #515151;
+  color: inherit;
 }
 /* line 898, ../scss/default.scss */
 .title-slide hgroup h2 {
   font-size: 34px;
-  color: darkgrey;
+  color: inherit;
   font-weight: inherit;
 }
 /* line 904, ../scss/default.scss */
 .title-slide hgroup p {
   font-size: 20px;
-  color: #797979;
+  color: inherit;
   line-height: 1.3;
   margin-top: 2em;
 }
 
 /* line 913, ../scss/default.scss */
-.quote {
+.gotcha {
   color: #e6e6e6;
 }
 /* line 916, ../scss/default.scss */
-.quote .author {
+.gotcha .bottom {
   font-size: 24px;
   position: absolute;
   bottom: 80px;
   line-height: 1.4;
+}
+.gotcha h2 {
+  font-style: italic;
 }
 
 /* line 925, ../scss/default.scss */
