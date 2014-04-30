@@ -2,7 +2,7 @@ var SLIDE_CONFIG = {
   // Slide settings
   settings: {
     title: '&lt;The REST of D8&gt;',
-    subtitle: '',
+    subtitle: 'Drupal as an API Layer',
     eventInfo: {
       title: 'DrupalCamp Toronto 2014',
       date: '05/02/2014'
@@ -32,4 +32,3 @@ var SLIDE_CONFIG = {
     github: 'http://github.com/sebsebseb123<br/>'
   }]
 };
-

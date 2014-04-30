@@ -1500,3 +1500,36 @@ aside.gdbar img {
     font-family: monospace !important;
   }
 }
+
+/** Custom Config **/
+
+#arvin p,
+#seb p {
+  text-align: center;
+}
+
+#arvin {
+  float: left;
+  margin-left: 60px;
+}
+
+#seb {
+  float: right;
+  margin-right: 60px;
+}
+
+#arvin img,
+#seb img {
+  width: 350px;
+  -webkit-border-radius: 130px;
+}
+
+.prettyprint span:last-child {
+  display: inline-flex;
+  height: 28px;
+}
+
+.prettyprint.halnode {
+  overflow: scroll;
+  height: 220px;
+}

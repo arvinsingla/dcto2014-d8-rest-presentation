@@ -52,7 +52,7 @@ URL: https://code.google.com/p/io-2012-slides
         </li>
         <li>GET
           <ul>
-            <li>GET our first request (/node/1)</li>
+            <li>GET our first node</li>
             <li>Overview of how D8 does REST</li>
             <li>Current state of D8 REST</li>
             <li>Uses & Scenarios</li>
@@ -61,7 +61,7 @@ URL: https://code.google.com/p/io-2012-slides
         <li>POST/PATCH/DELETE
           <ul>
             <li>Formats (JSON / HAL / XML)</li>
-            <li>Authentication (/node/2/POST)</li>
+            <li>Authentication</li>
           </ul>
         </li>
         <li>D8 REST
@@ -79,19 +79,22 @@ URL: https://code.google.com/p/io-2012-slides
       <h2>Who are we?</h2>
     </hgroup>
     <article>
-      <br />
-      <p>Arvin Singla</p>
-      <ul>
-        <li>Likes Drupal</li>
-        <li>6'0"</li>
-      </ul>
-      <br />
-      <br />
-      <p>Sebastian Lesch</p>
-      <ul>
-        <li>Likes Drupal</li>
-        <li>5'8" & 1/2</li>
-      </ul>
+      <div id='arvin'>
+        <p>Arvin Singla</p>
+        <p><img src="images/arvin.jpg" /></p>
+        <ul>
+          <li>Likes Drupal</li>
+          <li>6'0"</li>
+        </ul>
+      </div>
+      <div id="seb">
+        <p>Sebastian Lesch</p>
+        <p><img src="images/seb.jpg" /></p>
+        <ul>
+          <li>Likes Drupal</li>
+          <li>5'8" & 1/2</li>
+        </ul>
+      </div>
     </article>
   </slide>
 
@@ -99,7 +102,7 @@ URL: https://code.google.com/p/io-2012-slides
     <aside class="gdbar"><img src="images/myplanet_logo_128.png"></aside>
     <hgroup class="auto-fadein">
       <h1>Basic D8 REST demo</h1>
-      <h2>Setting up Drupal to output REST from "minimal" profile</h2>
+      <h2>Setting up Drupal for REST from "minimal" profile</h2>
     </hgroup>
   </slide>
 
@@ -118,15 +121,179 @@ URL: https://code.google.com/p/io-2012-slides
     </hgroup>
     <article>
       <pre class="prettyprint">
-        http://localhost/node/1</pre>
-      <p>By default the returned format is HAL, and might look like this:</p>
-      <pre class="prettyprint" data-lang="HAL">
-{
-  nid: 1,
-  title: 'First post',
-  uid: 1
-}
-</pre>
+        http://localhost/node/1
+      </pre>
+      <p>GET requests must specify the Accept header</p>
+      <pre class="prettyprint">
+        Accept: application/hal+json
+      </pre>
+      <p>The default format preferred in D8 is is HAL+JSON</p>
+      <pre class="prettyprint halnode" data-lang="HAL">
+        {
+          "_links": {
+              "self": {
+                  "href": "http://d8-alpha11.dev/node/1"
+              },
+              "type": {
+                  "href": "http://d8-alpha11.dev/rest/type/node/article"
+              },
+              "http://d8-alpha11.dev/rest/relation/node/article/uid": [
+                  {
+                      "href": "http://d8-alpha11.dev/user/1",
+                      "lang": "en"
+                  }
+              ],
+              "http://d8-alpha11.dev/rest/relation/node/article/revision_uid": [
+                  {
+                      "href": "http://d8-alpha11.dev/user/0"
+                  }
+              ],
+              "http://d8-alpha11.dev/rest/relation/node/article/field_image": [
+                  {
+                      "href": ""
+                  }
+              ]
+          },
+          "uuid": [
+              {
+                  "value": "48480a5e-3bb8-4a7b-be00-b6eab8125e59"
+              }
+          ],
+          "type": [
+              {
+                  "target_id": "article"
+              }
+          ],
+          "langcode": [
+              {
+                  "value": "en"
+              }
+          ],
+          "title": [
+              {
+                  "value": "This is a test",
+                  "lang": "en"
+              }
+          ],
+          "_embedded": {
+              "http://d8-alpha11.dev/rest/relation/node/article/uid": [
+                  {
+                      "_links": {
+                          "self": {
+                              "href": "http://d8-alpha11.dev/user/1"
+                          },
+                          "type": {
+                              "href": "http://d8-alpha11.dev/rest/type/user/user"
+                          }
+                      },
+                      "uuid": [
+                          {
+                              "value": "c3b0a965-00bb-481d-8000-b7118d74b9da"
+                          }
+                      ],
+                      "lang": "en"
+                  }
+              ],
+              "http://d8-alpha11.dev/rest/relation/node/article/revision_uid": [
+                  {
+                      "_links": {
+                          "self": {
+                              "href": "http://d8-alpha11.dev/user/0"
+                          },
+                          "type": {
+                              "href": "http://d8-alpha11.dev/rest/type/user/user"
+                          }
+                      },
+                      "uuid": [
+                          {
+                              "value": "15708bb6-3365-4213-9553-834d3524323a"
+                          }
+                      ]
+                  }
+              ],
+              "http://d8-alpha11.dev/rest/relation/node/article/field_image": [
+                  {
+                      "_links": {
+                          "self": {
+                              "href": ""
+                          },
+                          "type": {
+                              "href": "http://d8-alpha11.dev/rest/type/file/file"
+                          }
+                      },
+                      "uuid": [
+                          {
+                              "value": "df5fc8fc-f578-40af-8400-f2628ad605f2"
+                          }
+                      ],
+                      "uri": [
+                          {
+                              "value": "http://d8-alpha11.dev/"
+                          }
+                      ]
+                  }
+              ]
+          },
+          "status": [
+              {
+                  "value": "1",
+                  "lang": "en"
+              }
+          ],
+          "created": [
+              {
+                  "value": "1398642157",
+                  "lang": "en"
+              }
+          ],
+          "changed": [
+              {
+                  "value": "1398642227",
+                  "lang": "en"
+              }
+          ],
+          "promote": [
+              {
+                  "value": "1",
+                  "lang": "en"
+              }
+          ],
+          "sticky": [
+              {
+                  "value": "0",
+                  "lang": "en"
+              }
+          ],
+          "revision_timestamp": [
+              {
+                  "value": "0"
+              }
+          ],
+          "log": [
+              {
+                  "value": "",
+                  "lang": "en"
+              }
+          ],
+          "body": [
+              {
+                  "value": "<p>This is a tes</p>\r\n",
+                  "format": "basic_html",
+                  "summary": ""
+              }
+          ],
+          "comment": [
+              {
+                  "status": "2",
+                  "cid": "0",
+                  "last_comment_timestamp": "1398642227",
+                  "last_comment_name": null,
+                  "last_comment_uid": "1",
+                  "comment_count": "0"
+              }
+          ]
+      }
+      </pre>
     </article>
   </slide>
 
@@ -167,7 +334,7 @@ URL: https://code.google.com/p/io-2012-slides
       <ul>
         <li>Have Drupal drive mobile applications</li>
         <li>Expose an API for your Drupal site</li>
-        <li>Have a "head less" drupal with an Angular front end</li>
+        <li>Have a "head less" drupal with a different front end</li>
       </ul>
     </article>
   </slide>
