@@ -313,14 +313,17 @@ URL: https://code.google.com/p/io-2012-slides
 
   <slide>
     <hgroup>
-      <h2>Current state of D8 REST</h2>
+      <h2>Current state of REST in drupal-8.x-alpha11</h2>
     </hgroup>
     <article>
-      <p>The low-down on D8's REST:</p>
+      <p>There are ~100 open issues in the D8 issue queue related to the WSCCInitiative.</p>
+      <p>Some issues we personally encountered:</p>
       <ul>
-        <li>Thing 1</li>
-        <li>Thing 2</li>
-        <li>Thing 3</li>
+        <li>Articles posted are not associated with the UID that posted them.</li>
+        <li>Create/Edit permissions are required for anon to create content.</li>
+        <li>Creating a node via POST does not return NID.</li>
+        <li>Imagefield support currently doesn't exist.</li>
+        <li>PATCH on a user entity's fields doesn't work.</li>
       </ul>
     </article>
   </slide>
@@ -369,16 +372,30 @@ URL: https://code.google.com/p/io-2012-slides
     </hgroup>
   </slide>
 
+  <slide class="segue dark gotcha nobackground">
+    <aside class="gdbar right bottom"><img src="images/myplanet_logo_128.png"></aside>
+    <hgroup class="bottom">
+      <h2>GOTCHA!</h2>
+    </hgroup>
+    <article class="flexbox vleft auto-fadein">
+      <p>POST endpoint url for nodes are inconsistent with other REST verbs</p>
+      <ul>
+        <li>POST - /entity/node/1</li>
+        <li>GET/PATCH/DELETE - /node/1</li>
+        <li>https://drupal.org/node/2019123</li>
+      </ul>
+    </article>
+  </slide>
+
   <slide>
     <hgroup>
       <h2>Authentication</h2>
     </hgroup>
     <article>
-      <p>These are the things to know when trying to authenticate:</p>
+      <p>Drupal core offers 2 different authentication methods for REST.</p>
       <ul>
-        <li>Thing 1</li>
-        <li>Thing 2</li>
-        <li>Thing 3</li>
+        <li>Cookie/Session</li>
+        <li>HTTP Basic</li>
       </ul>
     </article>
   </slide>
@@ -390,13 +407,13 @@ URL: https://code.google.com/p/io-2012-slides
     </hgroup>
     <article class="flexbox vleft auto-fadein">
       <p>
-        This is an example of a list of gotchas.
+        Coookie/Session based authentication requires sending a CSRF token using the X-CSRF-Token header.
       </p>
-      <ul>
-        <li>JSON</li>
-        <li>HAL</li>
-        <li>XML</li>
-      </ul>
+      <pre class="prettyprint">
+    // Extra GET request to retrieve the CSRF protection token.
+    $token = $client->get('rest/session/token')->send()->getBody(TRUE);
+    ... // Later on... when building the header array.
+    'X-CSRF-Token' => $token,</pre>
     </article>
   </slide>
 
