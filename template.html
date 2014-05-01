@@ -302,13 +302,42 @@ URL: https://code.google.com/p/io-2012-slides
       <h2>How D8 does REST</h2>
     </hgroup>
     <article>
-      <p>This is how D8 RESTs:</p>
+      <p>A REST request in D8 relies on two key modules:</p>
+      <p>Serialization (core/modules/serialization)</p>
       <ul>
-        <li>Thing 1</li>
-        <li>Thing 2</li>
-        <li>Thing 3</li>
+        <li>Responsible for (de)serializing entities</li>
+        <li>JSON and basic XML out of the box</li>
+        <li>HAL JSON included as it's own module (core/modules/hal)</li>
+      </ul>
+      <p>REST (core/modules/rest)</p>
+      <ul>
+        <li>Registers route listeners for requests</li>
+        <li>Manages dispatching the (de)serialization of entities</li>
+        <li>Manages how request/responses are handled</li>
       </ul>
     </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>GET Request Internals (Serialization)</h2>
+    </hgroup>
+    <article>
+      <p>Fetched entities are run through the serialization process which consists of normalization and encoding.</p>
+      <img src="images/entity-normalize-encode.png" />
+    </article>
+    <footer class="source">http://lin-clark.com/d8-rest-slides/#47</footer>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>GET Request Internals (Normalization)</h2>
+    </hgroup>
+    <article>
+      <p>A recursive chain of responsibility is used to normalize the entity and it's fields.</p>
+      <img src="images/entity-normalizer.png" />
+    </article>
+    <footer class="source right">http://lin-clark.com/d8-rest-slides/#49</footer>
   </slide>
 
   <slide>
