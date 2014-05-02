@@ -1545,3 +1545,12 @@ aside.gdbar img {
   top: 10px;
   font-size: 0.5em;
 }
+
+.edu-logos {
+  text-align: center;
+}
+.edu-logos img {
+  margin: 40px;
+  max-width: 400px;
+  height: auto;
+}
