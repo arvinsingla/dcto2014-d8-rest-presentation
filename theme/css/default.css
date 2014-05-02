@@ -1538,3 +1538,11 @@ aside.gdbar img {
   overflow: scroll;
   height: 450px;
 }
+.edu-logos {
+  text-align: center;
+}
+.edu-logos img {
+  margin: 40px;
+  max-width: 400px;
+  height: auto;
+}
