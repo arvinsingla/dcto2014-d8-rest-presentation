@@ -80,7 +80,7 @@ URL: https://code.google.com/p/io-2012-slides
             <li>Authentication</li>
           </ul>
         </li>
-        <li>D8 REST
+        <li>Supplemental
           <ul>
             <li>Special fields (Node refence, file, date, etc)</li>
             <li>A word on performance</li>
@@ -513,6 +513,16 @@ URL: https://code.google.com/p/io-2012-slides
     </article>
   </slide>
 
+  <slide class="segue dark gotcha nobackground">
+    <aside class="gdbar right bottom"><img src="images/myplanet_logo_128.png"></aside>
+    <hgroup class="bottom">
+      <h2>GOTCHA!</h2>
+    </hgroup>
+    <article class="flexbox vleft auto-fadein">
+      <p>When POST/PATCHing an entity reference. You must specify the UUID of the entity you are referencing, NOT the NID/UID/etc</p>
+    </article>
+  </slide>
+
   <slide>
     <hgroup>
       <h2>Authentication</h2>
@@ -522,12 +532,14 @@ URL: https://code.google.com/p/io-2012-slides
       <p>Cookie / Session</p>
         <ul>
           <li>How Drupal authentication currently works</li>
-          <li>For REST requires CSRF protection</li>
         </ul>
       <p>HTTP Basic</p></li>
         <ul>
           <li>Username and password transmitted in the HTTP header
-          <li>Ensure communication is done over HTTPS as user/password is sent as plain text</li>
+        </ul>
+      <p>CORS (Cross-origin Resource Sharing)</p>
+        <ul>
+          <li>No enforcement or support in Core yet for CORS (<a href="https://drupal.org/node/1869548">https://drupal.org/node/1869548</a>)</li>
         </ul>
       <p>Contrib</p>
         <ul>
@@ -561,14 +573,14 @@ URL: https://code.google.com/p/io-2012-slides
     <article>
       <p>A simple format that gives a consistent and easy way to hyperlink between resources in your API. It is used to represent Resources and Links.</p>
       <ul>
-        <li>Chosen as the default format for REST in Drupal</li>
+        <li>Chosen as the default format for <a href="https://groups.drupal.org/node/283413">REST in Drupal</a></li>
         <li>A resource can have Links (_links) or other Embedded (_embedded) resources</li>
         <li>A link has a target, and a relationship</li>
         <li>Promotes API discoverability</li>
       </ul>
     </article>
-    <aside class="right"><img src="images/hal-info-model.png" /></aside>
-    <footer class="source white">http://stateless.co/hal_specification.html</footer>
+    <img src="images/hal-info-model.png" / style="float: right;">
+    <footer class="source">http://stateless.co/hal_specification.html</footer>
   </slide>
 
   <slide>
@@ -597,7 +609,7 @@ URL: https://code.google.com/p/io-2012-slides
   <slide class="title-slide segue nobackground">
     <aside class="gdbar"><img src="images/myplanet_logo_128.png"></aside>
     <hgroup class="auto-fadein">
-      <h1>Extending</h1>
+      <h1>Supplemental</h1>
       <h2>Special Fields</h2>
       <h2>Performance considerations</h2>
       <h2>Views support</h2>
