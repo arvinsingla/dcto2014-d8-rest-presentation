@@ -44,6 +44,22 @@ URL: https://code.google.com/p/io-2012-slides
 
   <slide>
     <hgroup>
+      <h2>This presentation has changed... Sorry!</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+        <li>We are ONLY talking about RESTful principles in Drupal 8</li>
+        <li>We aren't going to talk about the theories behind REST</li>
+        <ul class="build">
+          <li>REST is only concerned with data elements</li>
+          <li>REST is not RPC</li>
+        </ul>
+      </ul>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
       <h2>Agenda</h2>
     </hgroup>
     <article>
@@ -67,6 +83,7 @@ URL: https://code.google.com/p/io-2012-slides
         <li>D8 REST
           <ul>
             <li>Special fields (Node refence, file, date, etc)</li>
+            <li>A word on performance</li>
             <li>Views & REST</li>
           </ul>
         </li>
@@ -95,6 +112,22 @@ URL: https://code.google.com/p/io-2012-slides
           <li>5'8" & 1/2</li>
         </ul>
       </div>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Myplanet Learning Programs</h2>
+    </hgroup>
+    <article>
+      <p>World of Webcraft (WoW)</p>
+      <ul>
+        <li>something</li>
+      </ul>
+      <p>Myplanet Fellowship</p>
+      <ul>
+        <li>something</li>
+      </ul>
     </article>
   </slide>
 
@@ -132,23 +165,23 @@ URL: https://code.google.com/p/io-2012-slides
         {
           "_links": {
               "self": {
-                  "href": "http://d8-alpha11.dev/node/1"
+                  "href": "http://d8.dev/node/1"
               },
               "type": {
-                  "href": "http://d8-alpha11.dev/rest/type/node/article"
+                  "href": "http://d8.dev/rest/type/node/article"
               },
-              "http://d8-alpha11.dev/rest/relation/node/article/uid": [
+              "http://d8.dev/rest/relation/node/article/uid": [
                   {
-                      "href": "http://d8-alpha11.dev/user/1",
+                      "href": "http://d8.dev/user/1",
                       "lang": "en"
                   }
               ],
-              "http://d8-alpha11.dev/rest/relation/node/article/revision_uid": [
+              "http://d8.dev/rest/relation/node/article/revision_uid": [
                   {
-                      "href": "http://d8-alpha11.dev/user/0"
+                      "href": "http://d8.dev/user/0"
                   }
               ],
-              "http://d8-alpha11.dev/rest/relation/node/article/field_image": [
+              "http://d8.dev/rest/relation/node/article/field_image": [
                   {
                       "href": ""
                   }
@@ -176,14 +209,14 @@ URL: https://code.google.com/p/io-2012-slides
               }
           ],
           "_embedded": {
-              "http://d8-alpha11.dev/rest/relation/node/article/uid": [
+              "http://d8.dev/rest/relation/node/article/uid": [
                   {
                       "_links": {
                           "self": {
-                              "href": "http://d8-alpha11.dev/user/1"
+                              "href": "http://d8.dev/user/1"
                           },
                           "type": {
-                              "href": "http://d8-alpha11.dev/rest/type/user/user"
+                              "href": "http://d8.dev/rest/type/user/user"
                           }
                       },
                       "uuid": [
@@ -194,14 +227,14 @@ URL: https://code.google.com/p/io-2012-slides
                       "lang": "en"
                   }
               ],
-              "http://d8-alpha11.dev/rest/relation/node/article/revision_uid": [
+              "http://d8.dev/rest/relation/node/article/revision_uid": [
                   {
                       "_links": {
                           "self": {
-                              "href": "http://d8-alpha11.dev/user/0"
+                              "href": "http://d8.dev/user/0"
                           },
                           "type": {
-                              "href": "http://d8-alpha11.dev/rest/type/user/user"
+                              "href": "http://d8.dev/rest/type/user/user"
                           }
                       },
                       "uuid": [
@@ -211,14 +244,14 @@ URL: https://code.google.com/p/io-2012-slides
                       ]
                   }
               ],
-              "http://d8-alpha11.dev/rest/relation/node/article/field_image": [
+              "http://d8.dev/rest/relation/node/article/field_image": [
                   {
                       "_links": {
                           "self": {
                               "href": ""
                           },
                           "type": {
-                              "href": "http://d8-alpha11.dev/rest/type/file/file"
+                              "href": "http://d8.dev/rest/type/file/file"
                           }
                       },
                       "uuid": [
@@ -228,7 +261,7 @@ URL: https://code.google.com/p/io-2012-slides
                       ],
                       "uri": [
                           {
-                              "value": "http://d8-alpha11.dev/"
+                              "value": "http://d8.dev/"
                           }
                       ]
                   }
@@ -297,23 +330,55 @@ URL: https://code.google.com/p/io-2012-slides
     </article>
   </slide>
 
+  <slide class="segue dark gotcha nobackground">
+    <aside class="gdbar right bottom"><img src="images/myplanet_logo_128.png"></aside>
+    <hgroup class="bottom">
+      <h2>GOTCHA!</h2>
+    </hgroup>
+    <article class="flexbox vleft auto-fadein">
+      <p>When you GET a User entity, the users password comes along for the ride. So be careful when exposing user entities</p>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Simplified explination of a GET request flow</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+        <li>HTTP GET to node/1 with Accept header set to appication/hal+json</li>
+        <li>HTTP kernel asks around for who will handle this request</li>
+        <li>REST module responds based on what formats and entities it knows about</li>
+        <li>REST module takes the request
+        <ul class="build">
+          <li>Gets our resource type associated to this request (EntityResource)
+          <li>Loads the entity (node)</li>
+          <li>Calls the GET method on our EntityResource using our loaded entity (access checks)</li>
+          <li>Builds a final entity based on the access checks</li>
+          <li>Serializes that entity based on the request format<li>
+          <li>Returns a response in the same format as the request</li>
+        </ul>
+      </ul>
+    </article>
+  </slide>
+
   <slide>
     <hgroup>
       <h2>How D8 does REST</h2>
     </hgroup>
     <article>
       <p>A REST request in D8 relies on two key modules:</p>
-      <p>Serialization (core/modules/serialization)</p>
-      <ul>
-        <li>Responsible for (de)serializing entities</li>
-        <li>JSON and basic XML out of the box</li>
-        <li>HAL JSON included as it's own module (core/modules/hal)</li>
-      </ul>
       <p>REST (core/modules/rest)</p>
       <ul>
         <li>Registers route listeners for requests</li>
         <li>Manages dispatching the (de)serialization of entities</li>
         <li>Manages how request/responses are handled</li>
+      </ul>
+      <p>Serialization (core/modules/serialization)</p>
+      <ul>
+        <li>Responsible for (de)serializing entities</li>
+        <li>JSON and basic XML out of the box</li>
+        <li>HAL JSON included as it's own module (core/modules/hal)</li>
       </ul>
     </article>
   </slide>
@@ -342,14 +407,18 @@ URL: https://code.google.com/p/io-2012-slides
 
   <slide>
     <hgroup>
-      <h2>Current state of D8 REST</h2>
+      <h2>Current state of REST as of drupal-8.x-alpha11</h2>
     </hgroup>
     <article>
-      <p>The low-down on D8's REST:</p>
+      <p>There are ~100 open issues in the D8 issue queue related to the WSCCInitiative.</p>
+      <p>Some issues we personally encountered:</p>
       <ul>
-        <li>Thing 1</li>
-        <li>Thing 2</li>
-        <li>Thing 3</li>
+        <li>Entities POSTed are not associated with the UID that posted them.</li>
+        <li>Create/Edit permissions are required for anyone other than admin to create content.</li>
+        <li>Creating a node via POST does not return any data about the created entity. (i.e. UUID, or NID)</li>
+        <li>Imagefield support currently doesn't exist in a meaningful way. (<a href="https://drupal.org/node/1927648">https://drupal.org/node/1927648</a>)</li>
+        <li>FileField support is available, but still doesn't work entirely as expected.</li>
+        <li>User entities are currently unstable with REST interaction</li>
       </ul>
     </article>
   </slide>
@@ -363,7 +432,7 @@ URL: https://code.google.com/p/io-2012-slides
       <ul>
         <li>Have Drupal drive mobile applications</li>
         <li>Expose an API for your Drupal site</li>
-        <li>Have a "head less" drupal with a different front end</li>
+        <li>Have a "headless" drupal with a different front end</li>
       </ul>
     </article>
   </slide>
@@ -394,8 +463,54 @@ URL: https://code.google.com/p/io-2012-slides
     <hgroup class="auto-fadein">
       <h1>POST/PATCH/DELETE</h1>
       <h2>Authentication</h2>
-      <h2>Formats (JSON/HAL/XML)</h2>
+      <h2>HAL JSON Format</h2>
     </hgroup>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>POST example</h2>
+    </hgroup>
+    <article>
+      <pre class="prettyprint">
+        http://localhost/entity/node
+      </pre>
+      <p>POST requests must specify the Content-Type header</p>
+      <pre class="prettyprint">
+        Content-Type: application/hal+json
+      </pre>
+      <p>The default format preferred in D8 is is HAL+JSON</p>
+      <pre class="prettyprint halnode" data-lang="HAL">
+        {
+            "_links": {
+              "type": {
+                "href":"http://d8.dev/rest/type/node/article"
+              }
+            },
+            "title": {
+                "value": "An awesome second node"
+            },
+            "body": {
+                "value": "I really hope this works"
+            }
+        }
+      </pre>
+    </article>
+  </slide>
+
+  <slide class="segue dark gotcha nobackground">
+    <aside class="gdbar right bottom"><img src="images/myplanet_logo_128.png"></aside>
+    <hgroup class="bottom">
+      <h2>GOTCHA!</h2>
+    </hgroup>
+    <article class="flexbox vleft auto-fadein">
+      <p>POST endpoint url for nodes are inconsistent with other REST verbs</p>
+      <ul>
+        <li>POST - /entity/node/1</li>
+        <li>GET/PATCH/DELETE - /node/1</li>
+        <li><a href="https://drupal.org/node/2019123">https://drupal.org/node/2019123</a></li>
+      </ul>
+    </article>
   </slide>
 
   <slide>
@@ -403,12 +518,21 @@ URL: https://code.google.com/p/io-2012-slides
       <h2>Authentication</h2>
     </hgroup>
     <article>
-      <p>These are the things to know when trying to authenticate:</p>
-      <ul>
-        <li>Thing 1</li>
-        <li>Thing 2</li>
-        <li>Thing 3</li>
-      </ul>
+      <h3>Drupal core offers different authentication methods for REST</h3>
+      <p>Cookie / Session</p>
+        <ul>
+          <li>How Drupal authentication currently works</li>
+          <li>For REST requires CSRF protection</li>
+        </ul>
+      <p>HTTP Basic</p></li>
+        <ul>
+          <li>Username and password transmitted in the HTTP header
+          <li>Ensure communication is done over HTTPS as user/password is sent as plain text</li>
+        </ul>
+      <p>Contrib</p>
+        <ul>
+          <li>Currently <a href="https://drupal.org/project/oauth">oAuth</a> has the only proper release for D8.</li>
+        </ul>
     </article>
   </slide>
 
@@ -419,49 +543,412 @@ URL: https://code.google.com/p/io-2012-slides
     </hgroup>
     <article class="flexbox vleft auto-fadein">
       <p>
-        This is an example of a list of gotchas.
+        Coookie/Session based authentication requires sending a CSRF token using the X-CSRF-Token header.
       </p>
-      <ul>
-        <li>JSON</li>
-        <li>HAL</li>
-        <li>XML</li>
-      </ul>
+      <pre class="prettyprint">
+    // Get your site CSRF token by visiting the url:
+    http://yoursite.com/rest/session/token
+    <br/>
+    // When making your request specify the CSRF token as follows.
+    X-CSRF-Token: UQ-L4bP1YWjFOvsE9EoRDh4Bx_UqWjzN6F-EyF5evIc</pre>
     </article>
   </slide>
 
   <slide>
     <hgroup>
-      <h2>Formats</h2>
+      <h2>HAL - Hypertext Application Language</h2>
     </hgroup>
     <article>
-      <p>Different types:</p>
+      <p>A simple format that gives a consistent and easy way to hyperlink between resources in your API. It is used to represent Resources and Links.</p>
       <ul>
-        <li>JSON</li>
-        <li>HAL</li>
-        <li>XML</li>
+        <li>Chosen as the default format for REST in Drupal</li>
+        <li>A resource can have Links (_links) or other Embedded (_embedded) resources</li>
+        <li>A link has a target, and a relationship</li>
+        <li>Promotes API discoverability</li>
       </ul>
+    </article>
+    <aside class="right"><img src="images/hal-info-model.png" /></aside>
+    <footer class="source white">http://stateless.co/hal_specification.html</footer>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Example HAL JSON</h2>
+    </hgroup>
+    <article>
+      <pre class="prettyprint" data-lang="HAL">
+        {
+          "_links": {
+            "type": {
+              "href":"http://d8.dev/rest/type/node/article"
+            }
+          },
+          "title": {
+              "value": "An awesome second node"
+          },
+          "body": {
+              "value": "I really hope this works"
+          }
+        }
+      </pre>
     </article>
   </slide>
 
   <slide class="title-slide segue nobackground">
     <aside class="gdbar"><img src="images/myplanet_logo_128.png"></aside>
     <hgroup class="auto-fadein">
-      <h1>D8 & REST</h1>
-      <h2>Special fields</h2>
-      <h2>Views & REST</h2>
+      <h1>Extending</h1>
+      <h2>Special Fields</h2>
+      <h2>Performance considerations</h2>
+      <h2>Views support</h2>
     </hgroup>
   </slide>
 
   <slide>
     <hgroup>
-      <h2>Special fields</h2>
+      <h2>Most field types are covered out of the box</h2>
     </hgroup>
     <article>
-      <p>Field types:</p>
+      <pre class="prettyprint bighal" data-lang="HAL">
+        {
+            "_links": {
+                "self": {
+                    "href": "http://d8.dev/node/3"
+                },
+                "type": {
+                    "href": "http://d8.dev/rest/type/node/article"
+                },
+                "http://d8.dev/rest/relation/node/article/uid": [
+                    {
+                        "href": "http://d8.dev/user/1",
+                        "lang": "en"
+                    }
+                ],
+                "http://d8.dev/rest/relation/node/article/revision_uid": [
+                    {
+                        "href": "http://d8.dev/user/0"
+                    }
+                ],
+                "http://d8.dev/rest/relation/node/article/field_entity_reference": [
+                    {
+                        "href": "http://d8.dev/node/2"
+                    }
+                ],
+                "http://d8.dev/rest/relation/node/article/field_file": [
+                    {
+                        "href": ""
+                    }
+                ],
+                "http://d8.dev/rest/relation/node/article/field_image": [
+                    {
+                        "href": ""
+                    }
+                ],
+                "http://d8.dev/rest/relation/node/article/field_tags": [
+                    {
+                        "href": "http://d8.dev/taxonomy/term/1"
+                    },
+                    {
+                        "href": "http://d8.dev/taxonomy/term/2"
+                    },
+                    {
+                        "href": "http://d8.dev/taxonomy/term/3"
+                    }
+                ]
+            },
+            "uuid": [
+                {
+                    "value": "6b64c606-4d36-48be-a049-73e8f9e531e7"
+                }
+            ],
+            "type": [
+                {
+                    "target_id": "article"
+                }
+            ],
+            "langcode": [
+                {
+                    "value": "en"
+                }
+            ],
+            "title": [
+                {
+                    "value": "All the fields",
+                    "lang": "en"
+                }
+            ],
+            "_embedded": {
+                "http://d8.dev/rest/relation/node/article/uid": [
+                    {
+                        "_links": {
+                            "self": {
+                                "href": "http://d8.dev/user/1"
+                            },
+                            "type": {
+                                "href": "http://d8.dev/rest/type/user/user"
+                            }
+                        },
+                        "uuid": [
+                            {
+                                "value": "c3b0a965-00bb-481d-8000-b7118d74b9da"
+                            }
+                        ],
+                        "lang": "en"
+                    }
+                ],
+                "http://d8.dev/rest/relation/node/article/revision_uid": [
+                    {
+                        "_links": {
+                            "self": {
+                                "href": "http://d8.dev/user/0"
+                            },
+                            "type": {
+                                "href": "http://d8.dev/rest/type/user/user"
+                            }
+                        },
+                        "uuid": [
+                            {
+                                "value": "15708bb6-3365-4213-9553-834d3524323a"
+                            }
+                        ]
+                    }
+                ],
+                "http://d8.dev/rest/relation/node/article/field_entity_reference": [
+                    {
+                        "_links": {
+                            "self": {
+                                "href": "http://d8.dev/node/2"
+                            },
+                            "type": {
+                                "href": "http://d8.dev/rest/type/node/article"
+                            }
+                        },
+                        "uuid": [
+                            {
+                                "value": "832750bb-caf5-4e55-a008-8b139a1fad14"
+                            }
+                        ]
+                    }
+                ],
+                "http://d8.dev/rest/relation/node/article/field_file": [
+                    {
+                        "_links": {
+                            "self": {
+                                "href": ""
+                            },
+                            "type": {
+                                "href": "http://d8.dev/rest/type/file/file"
+                            }
+                        },
+                        "uuid": [
+                            {
+                                "value": "a2974a63-0b6f-48fc-b70d-13dabbec5205"
+                            }
+                        ],
+                        "uri": [
+                            {
+                                "value": "http://d8.dev/"
+                            }
+                        ]
+                    }
+                ],
+                "http://d8.dev/rest/relation/node/article/field_image": [
+                    {
+                        "_links": {
+                            "self": {
+                                "href": ""
+                            },
+                            "type": {
+                                "href": "http://d8.dev/rest/type/file/file"
+                            }
+                        },
+                        "uuid": [
+                            {
+                                "value": "eff93e55-28d4-457d-9200-b48f0466192a"
+                            }
+                        ],
+                        "uri": [
+                            {
+                                "value": "http://d8.dev/"
+                            }
+                        ]
+                    }
+                ],
+                "http://d8.dev/rest/relation/node/article/field_tags": [
+                    {
+                        "_links": {
+                            "self": {
+                                "href": "http://d8.dev/taxonomy/term/1"
+                            },
+                            "type": {
+                                "href": "http://d8.dev/rest/type/taxonomy_term/tags"
+                            }
+                        },
+                        "uuid": [
+                            {
+                                "value": "e2b6fb6a-a1c9-4371-9b19-2515af94957d"
+                            }
+                        ]
+                    },
+                    {
+                        "_links": {
+                            "self": {
+                                "href": "http://d8.dev/taxonomy/term/2"
+                            },
+                            "type": {
+                                "href": "http://d8.dev/rest/type/taxonomy_term/tags"
+                            }
+                        },
+                        "uuid": [
+                            {
+                                "value": "edda7fbf-55f0-4e21-8800-ad9990d6e97f"
+                            }
+                        ]
+                    },
+                    {
+                        "_links": {
+                            "self": {
+                                "href": "http://d8.dev/taxonomy/term/3"
+                            },
+                            "type": {
+                                "href": "http://d8.dev/rest/type/taxonomy_term/tags"
+                            }
+                        },
+                        "uuid": [
+                            {
+                                "value": "d8502ec1-0126-4c62-a900-eded5e2f51b4"
+                            }
+                        ]
+                    }
+                ]
+            },
+            "status": [
+                {
+                    "value": "1",
+                    "lang": "en"
+                }
+            ],
+            "created": [
+                {
+                    "value": "1398996353",
+                    "lang": "en"
+                }
+            ],
+            "changed": [
+                {
+                    "value": "1398996587",
+                    "lang": "en"
+                }
+            ],
+            "promote": [
+                {
+                    "value": "1",
+                    "lang": "en"
+                }
+            ],
+            "sticky": [
+                {
+                    "value": "0",
+                    "lang": "en"
+                }
+            ],
+            "revision_timestamp": [
+                {
+                    "value": "0"
+                }
+            ],
+            "log": [
+                {
+                    "value": "",
+                    "lang": "en"
+                }
+            ],
+            "body": [
+                {
+                    "value": "<p>Lorem ipsum dolor sit amet
+                    "format": "basic_html",
+                    "summary": ""
+                }
+            ],
+            "comment": [
+                {
+                    "status": "2",
+                    "cid": "0",
+                    "last_comment_timestamp": "1398996587",
+                    "last_comment_name": null,
+                    "last_comment_uid": "1",
+                    "comment_count": "0"
+                }
+            ],
+            "field_boolean": [
+                {
+                    "value": "0"
+                }
+            ],
+            "field_date": [
+                {
+                    "value": "2014-05-02T02:05:54"
+                }
+            ],
+            "field_email": [
+                {
+                    "value": "arvin@myplanetdigital.com"
+                }
+            ],
+            "field_number_multiple": [
+                {
+                    "value": "12345"
+                },
+                {
+                    "value": "54321"
+                },
+                {
+                    "value": "911"
+                }
+            ],
+            "field_text_multiple": [
+                {
+                    "value": "Hello World",
+                    "format": null
+                },
+                {
+                    "value": "Foo",
+                    "format": null
+                },
+                {
+                    "value": "Bar",
+                    "format": null
+                },
+                {
+                    "value": "Baz",
+                    "format": null
+                }
+            ]
+        }
+      </pre>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Custom fields</h2>
+    </hgroup>
+    <article>
+      <p>As simple as introducing a (de)normalizer for your custom field type to specify how the field is output</p>
+      <img src="images/normalizer-with-image.png" />
+    </article>
+    <footer class="source right">http://lin-clark.com/d8-rest-slides/#49</footer>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>A word on performance</h2>
+    </hgroup>
+    <article>
       <ul>
-        <li>Node refence</li>
-        <li>File</li>
-        <li>Date</li>
+        <li>Traditional PHP performance rules still apply</li>
+        <li>Traditional caching rules apply (anonymous vs authenticated)</li>
+        <li>We are still doing a full bootstrap (But it's not the same)</li>
       </ul>
     </article>
   </slide>
@@ -471,11 +958,12 @@ URL: https://code.google.com/p/io-2012-slides
       <h2>Views module</h2>
     </hgroup>
     <article>
-      <p>Notes about views:</p>
+      <p>Views now allows for building custom (GET) endpoints</p>
       <ul>
-        <li>Thing 1</li>
-        <li>Thing 2</li>
-        <li>Thing 3</li>
+        <li>Can specify your output format from available installed formats</li>
+        <li>Allows for the inclusion of path variables</li>
+        <li>More advanced HAL support isn't available yet</li>
+        <li>Views endpoints don't support Accept header matching</li>
       </ul>
     </article>
   </slide>

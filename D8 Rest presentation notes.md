@@ -41,7 +41,7 @@ Path: /entity/node
         "href":"http://d8-alpha11.dev/rest/type/node/article"
       }
     },
-    "title": { 
+    "title": {
         "value": "An awesome second node"
     },
     "body": {
@@ -49,13 +49,16 @@ Path: /entity/node
     }
 }
 
-GOTCHA: Articles posted are not associated with the UID that posted them. They are currently Anonymous 
-GOTCHA: GET/PATCH/DELETE requests follow node/nid path structure, POST follow entity/node url structure (https://drupal.org/node/2019123)   
-GOTCHA: Standard Drupal Create/Edit permissions are required in order for anon to create content.
-GOTCHA: Session based authentication requires sending a CSRF token (rest/session/token) using the X-CSRF-Token header
-GOTCHA: Currently POST does not return any information surrounding the entity you just created, no NID or UUID
+CURRENT: Articles posted are not associated with the UID that posted them. They are currently Anonymous
+CURRENT: Standard Drupal Create/Edit permissions are required in order for anon to create content.
+CURRENT: Currently POST does not return any information surrounding the entity you just created, no NID or UUID
+CURRENT: Imagefield support currently doesn't exist (https://drupal.org/node/1927648)
+CURRENT: PATCH on a user entity's fields doesn't work.
+
+
+GOTCHA: GET/PATCH/DELETE requests follow node/nid path structure, POST follow entity/node url structure (https://drupal.org/node/2019123)
 GOTCHA: Entity reference fields use the UUID, not NID when creating a reference to another entity.
-GOTCHA: Imagefield support currently doesn't exist (https://drupal.org/node/1927648)
+GOTCHA: Session based authentication requires sending a CSRF token (rest/session/token) using the X-CSRF-Token header
 
 1. Updated the node we just created
 
@@ -70,7 +73,7 @@ Path: /node/x
         "href":"http://d8-alpha11.dev/rest/type/node/article"
       }
     },
-    "title": { 
+    "title": {
         "value": "An updated title"
     },
     "body": {

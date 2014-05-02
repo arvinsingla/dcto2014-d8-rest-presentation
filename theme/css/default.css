@@ -1533,3 +1533,8 @@ aside.gdbar img {
   overflow: scroll;
   height: 220px;
 }
+
+.prettyprint.bighal {
+  overflow: scroll;
+  height: 450px;
+}
